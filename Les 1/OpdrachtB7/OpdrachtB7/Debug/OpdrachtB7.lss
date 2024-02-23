@@ -1,0 +1,309 @@
+
+OpdrachtB7.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000001a6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000152  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000001a6  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000001d8  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  00000214  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000898  00000000  00000000  00000234  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000007e3  00000000  00000000  00000acc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000347  00000000  00000000  000012af  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000024  00000000  00000000  000015f8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000448  00000000  00000000  0000161c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000bc  00000000  00000000  00001a64  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  00001b20  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	45 c0       	rjmp	.+138    	; 0x8c <__ctors_end>
+   2:	00 00       	nop
+   4:	4b c0       	rjmp	.+150    	; 0x9c <__bad_interrupt>
+   6:	00 00       	nop
+   8:	49 c0       	rjmp	.+146    	; 0x9c <__bad_interrupt>
+   a:	00 00       	nop
+   c:	47 c0       	rjmp	.+142    	; 0x9c <__bad_interrupt>
+   e:	00 00       	nop
+  10:	45 c0       	rjmp	.+138    	; 0x9c <__bad_interrupt>
+  12:	00 00       	nop
+  14:	43 c0       	rjmp	.+134    	; 0x9c <__bad_interrupt>
+  16:	00 00       	nop
+  18:	41 c0       	rjmp	.+130    	; 0x9c <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	3f c0       	rjmp	.+126    	; 0x9c <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	3d c0       	rjmp	.+122    	; 0x9c <__bad_interrupt>
+  22:	00 00       	nop
+  24:	3b c0       	rjmp	.+118    	; 0x9c <__bad_interrupt>
+  26:	00 00       	nop
+  28:	39 c0       	rjmp	.+114    	; 0x9c <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	37 c0       	rjmp	.+110    	; 0x9c <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	35 c0       	rjmp	.+106    	; 0x9c <__bad_interrupt>
+  32:	00 00       	nop
+  34:	33 c0       	rjmp	.+102    	; 0x9c <__bad_interrupt>
+  36:	00 00       	nop
+  38:	31 c0       	rjmp	.+98     	; 0x9c <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	2f c0       	rjmp	.+94     	; 0x9c <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	2d c0       	rjmp	.+90     	; 0x9c <__bad_interrupt>
+  42:	00 00       	nop
+  44:	2b c0       	rjmp	.+86     	; 0x9c <__bad_interrupt>
+  46:	00 00       	nop
+  48:	29 c0       	rjmp	.+82     	; 0x9c <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	27 c0       	rjmp	.+78     	; 0x9c <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	25 c0       	rjmp	.+74     	; 0x9c <__bad_interrupt>
+  52:	00 00       	nop
+  54:	23 c0       	rjmp	.+70     	; 0x9c <__bad_interrupt>
+  56:	00 00       	nop
+  58:	21 c0       	rjmp	.+66     	; 0x9c <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	1f c0       	rjmp	.+62     	; 0x9c <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	1d c0       	rjmp	.+58     	; 0x9c <__bad_interrupt>
+  62:	00 00       	nop
+  64:	1b c0       	rjmp	.+54     	; 0x9c <__bad_interrupt>
+  66:	00 00       	nop
+  68:	19 c0       	rjmp	.+50     	; 0x9c <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	17 c0       	rjmp	.+46     	; 0x9c <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	15 c0       	rjmp	.+42     	; 0x9c <__bad_interrupt>
+  72:	00 00       	nop
+  74:	13 c0       	rjmp	.+38     	; 0x9c <__bad_interrupt>
+  76:	00 00       	nop
+  78:	11 c0       	rjmp	.+34     	; 0x9c <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	0f c0       	rjmp	.+30     	; 0x9c <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	0d c0       	rjmp	.+26     	; 0x9c <__bad_interrupt>
+  82:	00 00       	nop
+  84:	0b c0       	rjmp	.+22     	; 0x9c <__bad_interrupt>
+  86:	00 00       	nop
+  88:	09 c0       	rjmp	.+18     	; 0x9c <__bad_interrupt>
+	...
+
+0000008c <__ctors_end>:
+  8c:	11 24       	eor	r1, r1
+  8e:	1f be       	out	0x3f, r1	; 63
+  90:	cf ef       	ldi	r28, 0xFF	; 255
+  92:	d0 e1       	ldi	r29, 0x10	; 16
+  94:	de bf       	out	0x3e, r29	; 62
+  96:	cd bf       	out	0x3d, r28	; 61
+  98:	02 d0       	rcall	.+4      	; 0x9e <main>
+  9a:	59 c0       	rjmp	.+178    	; 0x14e <_exit>
+
+0000009c <__bad_interrupt>:
+  9c:	b1 cf       	rjmp	.-158    	; 0x0 <__vectors>
+
+0000009e <main>:
+#define button(number) (1 << number)
+
+
+int main(void)
+{
+	DDRA = 0xFF;
+  9e:	8f ef       	ldi	r24, 0xFF	; 255
+  a0:	8a bb       	out	0x1a, r24	; 26
+	DDRB = 0xFF;
+  a2:	87 bb       	out	0x17, r24	; 23
+	DDRD = 0x00;
+  a4:	11 ba       	out	0x11, r1	; 17
+	
+	DDRC = 0xFF;
+  a6:	84 bb       	out	0x14, r24	; 20
+	int state = 0;
+  a8:	80 e0       	ldi	r24, 0x00	; 0
+  aa:	90 e0       	ldi	r25, 0x00	; 0
+  ac:	11 c0       	rjmp	.+34     	; 0xd0 <main+0x32>
+			if(PIND & button(6)){
+				state = 1;
+			}
+			if (PIND & button(5))
+			{
+				state = 2;
+  ae:	82 e0       	ldi	r24, 0x02	; 2
+  b0:	90 e0       	ldi	r25, 0x00	; 0
+  b2:	0e c0       	rjmp	.+28     	; 0xd0 <main+0x32>
+			PORTA=0x00;
+			PORTB=0xFF;
+			PORTC=0xFF;
+			if (PIND & button(5))
+			{
+				state = 2;
+  b4:	82 e0       	ldi	r24, 0x02	; 2
+  b6:	90 e0       	ldi	r25, 0x00	; 0
+  b8:	0b c0       	rjmp	.+22     	; 0xd0 <main+0x32>
+			PORTA=0x00;
+			PORTB=0x00;
+			PORTC=0xFF;
+			if (PIND & button(5))
+			{
+				state = 3;
+  ba:	83 e0       	ldi	r24, 0x03	; 3
+  bc:	90 e0       	ldi	r25, 0x00	; 0
+  be:	08 c0       	rjmp	.+16     	; 0xd0 <main+0x32>
+			PORTA=0x00;
+			PORTB=0x00;
+			PORTC=0x00;
+			if (PIND & button(5)||PIND & button(6))
+			{
+				state = 4;
+  c0:	84 e0       	ldi	r24, 0x04	; 4
+  c2:	90 e0       	ldi	r25, 0x00	; 0
+  c4:	05 c0       	rjmp	.+10     	; 0xd0 <main+0x32>
+  c6:	84 e0       	ldi	r24, 0x04	; 4
+  c8:	90 e0       	ldi	r25, 0x00	; 0
+  ca:	02 c0       	rjmp	.+4      	; 0xd0 <main+0x32>
+			PORTA=0xF0;
+			PORTB=0xF0;
+			PORTC=0xF0;
+			if (PIND & button(7))
+			{
+				state = 0;
+  cc:	80 e0       	ldi	r24, 0x00	; 0
+  ce:	90 e0       	ldi	r25, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  d0:	2f ef       	ldi	r18, 0xFF	; 255
+  d2:	34 e3       	ldi	r19, 0x34	; 52
+  d4:	4c e0       	ldi	r20, 0x0C	; 12
+  d6:	21 50       	subi	r18, 0x01	; 1
+  d8:	30 40       	sbci	r19, 0x00	; 0
+  da:	40 40       	sbci	r20, 0x00	; 0
+  dc:	e1 f7       	brne	.-8      	; 0xd6 <main+0x38>
+  de:	00 c0       	rjmp	.+0      	; 0xe0 <main+0x42>
+  e0:	00 00       	nop
+	DDRC = 0xFF;
+	int state = 0;
+	while (1)
+	{
+		_delay_ms(500);
+		switch(state){
+  e2:	81 30       	cpi	r24, 0x01	; 1
+  e4:	91 05       	cpc	r25, r1
+  e6:	b1 f0       	breq	.+44     	; 0x114 <main+0x76>
+  e8:	1c f4       	brge	.+6      	; 0xf0 <main+0x52>
+  ea:	00 97       	sbiw	r24, 0x00	; 0
+  ec:	41 f0       	breq	.+16     	; 0xfe <main+0x60>
+  ee:	28 c0       	rjmp	.+80     	; 0x140 <main+0xa2>
+  f0:	82 30       	cpi	r24, 0x02	; 2
+  f2:	91 05       	cpc	r25, r1
+  f4:	b1 f0       	breq	.+44     	; 0x122 <main+0x84>
+  f6:	83 30       	cpi	r24, 0x03	; 3
+  f8:	91 05       	cpc	r25, r1
+  fa:	d1 f0       	breq	.+52     	; 0x130 <main+0x92>
+  fc:	21 c0       	rjmp	.+66     	; 0x140 <main+0xa2>
+			case 0:
+			PORTA=0xFF;
+  fe:	2f ef       	ldi	r18, 0xFF	; 255
+ 100:	2b bb       	out	0x1b, r18	; 27
+			PORTB=0xFF;
+ 102:	28 bb       	out	0x18, r18	; 24
+			PORTC=0xFF;
+ 104:	25 bb       	out	0x15, r18	; 21
+			if(PIND & button(6)){
+ 106:	86 9b       	sbis	0x10, 6	; 16
+ 108:	02 c0       	rjmp	.+4      	; 0x10e <main+0x70>
+				state = 1;
+ 10a:	81 e0       	ldi	r24, 0x01	; 1
+ 10c:	90 e0       	ldi	r25, 0x00	; 0
+			}
+			if (PIND & button(5))
+ 10e:	85 99       	sbic	0x10, 5	; 16
+ 110:	ce cf       	rjmp	.-100    	; 0xae <main+0x10>
+ 112:	de cf       	rjmp	.-68     	; 0xd0 <main+0x32>
+			{
+				state = 2;
+			}
+			break;
+			case 1:
+			PORTA=0x00;
+ 114:	1b ba       	out	0x1b, r1	; 27
+			PORTB=0xFF;
+ 116:	2f ef       	ldi	r18, 0xFF	; 255
+ 118:	28 bb       	out	0x18, r18	; 24
+			PORTC=0xFF;
+ 11a:	25 bb       	out	0x15, r18	; 21
+			if (PIND & button(5))
+ 11c:	85 99       	sbic	0x10, 5	; 16
+ 11e:	ca cf       	rjmp	.-108    	; 0xb4 <main+0x16>
+ 120:	d7 cf       	rjmp	.-82     	; 0xd0 <main+0x32>
+			{
+				state = 2;
+			}
+			break;
+			case 2:
+			PORTA=0x00;
+ 122:	1b ba       	out	0x1b, r1	; 27
+			PORTB=0x00;
+ 124:	18 ba       	out	0x18, r1	; 24
+			PORTC=0xFF;
+ 126:	2f ef       	ldi	r18, 0xFF	; 255
+ 128:	25 bb       	out	0x15, r18	; 21
+			if (PIND & button(5))
+ 12a:	85 99       	sbic	0x10, 5	; 16
+ 12c:	c6 cf       	rjmp	.-116    	; 0xba <main+0x1c>
+ 12e:	d0 cf       	rjmp	.-96     	; 0xd0 <main+0x32>
+			{
+				state = 3;
+			}
+			break;
+			case 3:
+			PORTA=0x00;
+ 130:	1b ba       	out	0x1b, r1	; 27
+			PORTB=0x00;
+ 132:	18 ba       	out	0x18, r1	; 24
+			PORTC=0x00;
+ 134:	15 ba       	out	0x15, r1	; 21
+			if (PIND & button(5)||PIND & button(6))
+ 136:	85 99       	sbic	0x10, 5	; 16
+ 138:	c3 cf       	rjmp	.-122    	; 0xc0 <main+0x22>
+ 13a:	86 99       	sbic	0x10, 6	; 16
+ 13c:	c4 cf       	rjmp	.-120    	; 0xc6 <main+0x28>
+ 13e:	c8 cf       	rjmp	.-112    	; 0xd0 <main+0x32>
+			{
+				state = 4;
+			}
+			break;
+			default:
+			PORTA=0xF0;
+ 140:	20 ef       	ldi	r18, 0xF0	; 240
+ 142:	2b bb       	out	0x1b, r18	; 27
+			PORTB=0xF0;
+ 144:	28 bb       	out	0x18, r18	; 24
+			PORTC=0xF0;
+ 146:	25 bb       	out	0x15, r18	; 21
+			if (PIND & button(7))
+ 148:	87 9b       	sbis	0x10, 7	; 16
+ 14a:	c2 cf       	rjmp	.-124    	; 0xd0 <main+0x32>
+ 14c:	bf cf       	rjmp	.-130    	; 0xcc <main+0x2e>
+
+0000014e <_exit>:
+ 14e:	f8 94       	cli
+
+00000150 <__stop_program>:
+ 150:	ff cf       	rjmp	.-2      	; 0x150 <__stop_program>
