@@ -59,6 +59,13 @@ void lcd_strobe_lcd_e(void) {
 	_delay_ms(1);			// nodig?
 }
 
+void lcd_move_text(int position, char *str){
+	lcd_write_cmd(0x01);
+	lcd_set_cursor(position);
+	lcd_display_text(str);
+}
+	
+
 
 void lcd_write_cmd(unsigned char byte) {
 	// First nibble.

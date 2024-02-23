@@ -128,17 +128,17 @@ Disassembly of section .text:
   a4:	0f 92       	push	r0
   a6:	11 24       	eor	r1, r1
   a8:	8f 93       	push	r24
-		if (OCR2 == 25)
+		if (OCR2 == 194)
   aa:	83 b5       	in	r24, 0x23	; 35
-  ac:	89 31       	cpi	r24, 0x19	; 25
+  ac:	82 3c       	cpi	r24, 0xC2	; 194
   ae:	31 f4       	brne	.+12     	; 0xbc <__vector_9+0x1e>
 		{
 			PORTD |= (1<<7);
   b0:	82 b3       	in	r24, 0x12	; 18
   b2:	80 68       	ori	r24, 0x80	; 128
   b4:	82 bb       	out	0x12, r24	; 18
-			OCR2 = 15;
-  b6:	8f e0       	ldi	r24, 0x0F	; 15
+			OCR2 = 116;
+  b6:	84 e7       	ldi	r24, 0x74	; 116
   b8:	83 bd       	out	0x23, r24	; 35
   ba:	05 c0       	rjmp	.+10     	; 0xc6 <__vector_9+0x28>
 		}
@@ -148,8 +148,8 @@ Disassembly of section .text:
   bc:	82 b3       	in	r24, 0x12	; 18
   be:	8f 77       	andi	r24, 0x7F	; 127
   c0:	82 bb       	out	0x12, r24	; 18
-			OCR2 = 25;
-  c2:	89 e1       	ldi	r24, 0x19	; 25
+			OCR2 = 194;
+  c2:	82 ec       	ldi	r24, 0xC2	; 194
   c4:	83 bd       	out	0x23, r24	; 35
 		}
 	}
@@ -166,13 +166,13 @@ int main(void)
 {
 
 	
-	TCCR2 = 0b00011100; // configure normal mode for the TCCR2 with external clock
-  d2:	8c e1       	ldi	r24, 0x1C	; 28
+	TCCR2 = 0b00011101; // configure normal mode for the TCCR2 with external clock
+  d2:	8d e1       	ldi	r24, 0x1D	; 29
   d4:	85 bd       	out	0x25, r24	; 37
 	TCNT2 = 0x00;
   d6:	14 bc       	out	0x24, r1	; 36
-	OCR2 = 25;
-  d8:	89 e1       	ldi	r24, 0x19	; 25
+	OCR2 = 194;
+  d8:	82 ec       	ldi	r24, 0xC2	; 194
   da:	83 bd       	out	0x23, r24	; 35
 	DDRD = 0xFF;
   dc:	8f ef       	ldi	r24, 0xFF	; 255
