@@ -1,0 +1,220 @@
+
+OpdrachtB5.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000004a  00800100  00000120  00000194  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000120  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000001de  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000210  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  0000024c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000008c9  00000000  00000000  0000026c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000806  00000000  00000000  00000b35  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002aa  00000000  00000000  0000133b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000034  00000000  00000000  000015e8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000455  00000000  00000000  0000161c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000b4  00000000  00000000  00001a71  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  00001b25  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	45 c0       	rjmp	.+138    	; 0x8c <__ctors_end>
+   2:	00 00       	nop
+   4:	58 c0       	rjmp	.+176    	; 0xb6 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	56 c0       	rjmp	.+172    	; 0xb6 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	54 c0       	rjmp	.+168    	; 0xb6 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	52 c0       	rjmp	.+164    	; 0xb6 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	50 c0       	rjmp	.+160    	; 0xb6 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	4e c0       	rjmp	.+156    	; 0xb6 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	4c c0       	rjmp	.+152    	; 0xb6 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	4a c0       	rjmp	.+148    	; 0xb6 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	48 c0       	rjmp	.+144    	; 0xb6 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	46 c0       	rjmp	.+140    	; 0xb6 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	44 c0       	rjmp	.+136    	; 0xb6 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	42 c0       	rjmp	.+132    	; 0xb6 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	40 c0       	rjmp	.+128    	; 0xb6 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	3e c0       	rjmp	.+124    	; 0xb6 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	3c c0       	rjmp	.+120    	; 0xb6 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	3a c0       	rjmp	.+116    	; 0xb6 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	38 c0       	rjmp	.+112    	; 0xb6 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	36 c0       	rjmp	.+108    	; 0xb6 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	34 c0       	rjmp	.+104    	; 0xb6 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	32 c0       	rjmp	.+100    	; 0xb6 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	30 c0       	rjmp	.+96     	; 0xb6 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	2e c0       	rjmp	.+92     	; 0xb6 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	2c c0       	rjmp	.+88     	; 0xb6 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	2a c0       	rjmp	.+84     	; 0xb6 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	28 c0       	rjmp	.+80     	; 0xb6 <__bad_interrupt>
+  66:	00 00       	nop
+  68:	26 c0       	rjmp	.+76     	; 0xb6 <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	24 c0       	rjmp	.+72     	; 0xb6 <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	22 c0       	rjmp	.+68     	; 0xb6 <__bad_interrupt>
+  72:	00 00       	nop
+  74:	20 c0       	rjmp	.+64     	; 0xb6 <__bad_interrupt>
+  76:	00 00       	nop
+  78:	1e c0       	rjmp	.+60     	; 0xb6 <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	1c c0       	rjmp	.+56     	; 0xb6 <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	1a c0       	rjmp	.+52     	; 0xb6 <__bad_interrupt>
+  82:	00 00       	nop
+  84:	18 c0       	rjmp	.+48     	; 0xb6 <__bad_interrupt>
+  86:	00 00       	nop
+  88:	16 c0       	rjmp	.+44     	; 0xb6 <__bad_interrupt>
+	...
+
+0000008c <__ctors_end>:
+  8c:	11 24       	eor	r1, r1
+  8e:	1f be       	out	0x3f, r1	; 63
+  90:	cf ef       	ldi	r28, 0xFF	; 255
+  92:	d0 e1       	ldi	r29, 0x10	; 16
+  94:	de bf       	out	0x3e, r29	; 62
+  96:	cd bf       	out	0x3d, r28	; 61
+
+00000098 <__do_copy_data>:
+  98:	11 e0       	ldi	r17, 0x01	; 1
+  9a:	a0 e0       	ldi	r26, 0x00	; 0
+  9c:	b1 e0       	ldi	r27, 0x01	; 1
+  9e:	e0 e2       	ldi	r30, 0x20	; 32
+  a0:	f1 e0       	ldi	r31, 0x01	; 1
+  a2:	00 e0       	ldi	r16, 0x00	; 0
+  a4:	0b bf       	out	0x3b, r16	; 59
+  a6:	02 c0       	rjmp	.+4      	; 0xac <__do_copy_data+0x14>
+  a8:	07 90       	elpm	r0, Z+
+  aa:	0d 92       	st	X+, r0
+  ac:	aa 34       	cpi	r26, 0x4A	; 74
+  ae:	b1 07       	cpc	r27, r17
+  b0:	d9 f7       	brne	.-10     	; 0xa8 <__do_copy_data+0x10>
+  b2:	02 d0       	rcall	.+4      	; 0xb8 <main>
+  b4:	33 c0       	rjmp	.+102    	; 0x11c <_exit>
+
+000000b6 <__bad_interrupt>:
+  b6:	a4 cf       	rjmp	.-184    	; 0x0 <__vectors>
+
+000000b8 <main>:
+#include <avr/io.h>
+#define F_CPU 8000000UL
+#include <util/delay.h>
+
+int main(void)
+{
+  b8:	cf 93       	push	r28
+  ba:	df 93       	push	r29
+  bc:	cd b7       	in	r28, 0x3d	; 61
+  be:	de b7       	in	r29, 0x3e	; 62
+  c0:	ca 54       	subi	r28, 0x4A	; 74
+  c2:	d1 09       	sbc	r29, r1
+  c4:	0f b6       	in	r0, 0x3f	; 63
+  c6:	f8 94       	cli
+  c8:	de bf       	out	0x3e, r29	; 62
+  ca:	0f be       	out	0x3f, r0	; 63
+  cc:	cd bf       	out	0x3d, r28	; 61
+	int animation[] = {0b00000000,
+  ce:	8a e4       	ldi	r24, 0x4A	; 74
+  d0:	e0 e0       	ldi	r30, 0x00	; 0
+  d2:	f1 e0       	ldi	r31, 0x01	; 1
+  d4:	de 01       	movw	r26, r28
+  d6:	11 96       	adiw	r26, 0x01	; 1
+  d8:	01 90       	ld	r0, Z+
+  da:	0d 92       	st	X+, r0
+  dc:	8a 95       	dec	r24
+  de:	e1 f7       	brne	.-8      	; 0xd8 <main+0x20>
+		0b11111000,0b11111100,
+		0b11111110,0b11111111,
+		0b01111110,0b00111100,
+		0b00011000,0b00000000
+	};
+	DDRD = 0xFF;
+  e0:	8f ef       	ldi	r24, 0xFF	; 255
+  e2:	81 bb       	out	0x11, r24	; 17
+	while (1)
+	{
+		for (int i = 0; i < sizeof(animation); i++)
+  e4:	80 e0       	ldi	r24, 0x00	; 0
+  e6:	90 e0       	ldi	r25, 0x00	; 0
+  e8:	15 c0       	rjmp	.+42     	; 0x114 <main+0x5c>
+		{
+			
+			PORTD = animation[i];
+  ea:	fc 01       	movw	r30, r24
+  ec:	ee 0f       	add	r30, r30
+  ee:	ff 1f       	adc	r31, r31
+  f0:	21 e0       	ldi	r18, 0x01	; 1
+  f2:	30 e0       	ldi	r19, 0x00	; 0
+  f4:	2c 0f       	add	r18, r28
+  f6:	3d 1f       	adc	r19, r29
+  f8:	e2 0f       	add	r30, r18
+  fa:	f3 1f       	adc	r31, r19
+  fc:	20 81       	ld	r18, Z
+  fe:	22 bb       	out	0x12, r18	; 18
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 100:	3f e7       	ldi	r19, 0x7F	; 127
+ 102:	49 ea       	ldi	r20, 0xA9	; 169
+ 104:	23 e0       	ldi	r18, 0x03	; 3
+ 106:	31 50       	subi	r19, 0x01	; 1
+ 108:	40 40       	sbci	r20, 0x00	; 0
+ 10a:	20 40       	sbci	r18, 0x00	; 0
+ 10c:	e1 f7       	brne	.-8      	; 0x106 <main+0x4e>
+ 10e:	00 c0       	rjmp	.+0      	; 0x110 <main+0x58>
+ 110:	00 00       	nop
+		0b00011000,0b00000000
+	};
+	DDRD = 0xFF;
+	while (1)
+	{
+		for (int i = 0; i < sizeof(animation); i++)
+ 112:	01 96       	adiw	r24, 0x01	; 1
+ 114:	8a 34       	cpi	r24, 0x4A	; 74
+ 116:	91 05       	cpc	r25, r1
+ 118:	40 f3       	brcs	.-48     	; 0xea <main+0x32>
+ 11a:	e4 cf       	rjmp	.-56     	; 0xe4 <main+0x2c>
+
+0000011c <_exit>:
+ 11c:	f8 94       	cli
+
+0000011e <__stop_program>:
+ 11e:	ff cf       	rjmp	.-2      	; 0x11e <__stop_program>
