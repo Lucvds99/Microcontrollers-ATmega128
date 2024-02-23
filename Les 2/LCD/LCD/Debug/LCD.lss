@@ -21,11 +21,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  000000c4  00000000  00000000  00001d8c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000004a5  00000000  00000000  00001e50  2**0
+  9 .debug_str    00000511  00000000  00000000  00001e50  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000259  00000000  00000000  000022f5  2**0
+ 10 .debug_loc    00000259  00000000  00000000  00002361  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000050  00000000  00000000  0000254e  2**0
+ 11 .debug_ranges 00000050  00000000  00000000  000025ba  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -131,12 +131,6 @@ Disassembly of section .text:
   b6:	a4 cf       	rjmp	.-184    	; 0x0 <__vectors>
 
 000000b8 <lcd_strobe_lcd_e>:
-		lcd_write_cmd(0x80 + position);
-}
-
-
-void lcd_strobe_lcd_e(void) {
-	PORTC |= (1<<LCD_E);	// E high
   b8:	85 b3       	in	r24, 0x15	; 21
   ba:	88 60       	ori	r24, 0x08	; 8
   bc:	85 bb       	out	0x15, r24	; 21
@@ -152,8 +146,6 @@ void lcd_strobe_lcd_e(void) {
   c4:	f1 f7       	brne	.-4      	; 0xc2 <lcd_strobe_lcd_e+0xa>
   c6:	00 c0       	rjmp	.+0      	; 0xc8 <lcd_strobe_lcd_e+0x10>
   c8:	00 00       	nop
-	_delay_ms(1);			// nodig
-	PORTC &= ~(1<<LCD_E);  	// E low
   ca:	85 b3       	in	r24, 0x15	; 21
   cc:	87 7f       	andi	r24, 0xF7	; 247
   ce:	85 bb       	out	0x15, r24	; 21
@@ -166,137 +158,66 @@ void lcd_strobe_lcd_e(void) {
   dc:	08 95       	ret
 
 000000de <lcd_write_cmd>:
-	_delay_ms(1);			// nodig?
-}
-
-
-void lcd_write_cmd(unsigned char byte) {
   de:	cf 93       	push	r28
   e0:	c8 2f       	mov	r28, r24
-	// First nibble.
-	PORTC = byte & 0xf0;
   e2:	80 7f       	andi	r24, 0xF0	; 240
   e4:	85 bb       	out	0x15, r24	; 21
-	lcd_strobe_lcd_e();
   e6:	e8 df       	rcall	.-48     	; 0xb8 <lcd_strobe_lcd_e>
-
-	// Second nibble
-	PORTC = (byte<<4);
   e8:	c2 95       	swap	r28
   ea:	c0 7f       	andi	r28, 0xF0	; 240
-	lcd_strobe_lcd_e();
   ec:	c5 bb       	out	0x15, r28	; 21
   ee:	e4 df       	rcall	.-56     	; 0xb8 <lcd_strobe_lcd_e>
-}
   f0:	cf 91       	pop	r28
   f2:	08 95       	ret
 
 000000f4 <lcd_init>:
-
-	
-void lcd_init(void)
-{
-
-	DDRC = 0xFF;
   f4:	8f ef       	ldi	r24, 0xFF	; 255
   f6:	84 bb       	out	0x14, r24	; 20
-	PORTC = 0x00;
   f8:	15 ba       	out	0x15, r1	; 21
-
-	// Step 2 (table 12), set interface data-lenght, and amount of lines
-	lcd_write_cmd(0x28);
   fa:	88 e2       	ldi	r24, 0x28	; 40
   fc:	f0 df       	rcall	.-32     	; 0xde <lcd_write_cmd>
-	
-	// Step 3, clear display
-	lcd_write_cmd(0x01);
   fe:	81 e0       	ldi	r24, 0x01	; 1
  100:	ee df       	rcall	.-36     	; 0xde <lcd_write_cmd>
-
-	// Step 4 (table 12), turn on display
-	lcd_write_cmd(0x0C);
  102:	8c e0       	ldi	r24, 0x0C	; 12
  104:	ec df       	rcall	.-40     	; 0xde <lcd_write_cmd>
-
-	// Set cursor
-	lcd_write_cmd(0x0F);
  106:	8f e0       	ldi	r24, 0x0F	; 15
  108:	ea cf       	rjmp	.-44     	; 0xde <lcd_write_cmd>
  10a:	08 95       	ret
 
 0000010c <lcd_set_cursor>:
  10c:	80 58       	subi	r24, 0x80	; 128
-	}
-}
-
-void lcd_set_cursor(int position)
-{	
-		lcd_write_cmd(0x80 + position);
  10e:	e7 cf       	rjmp	.-50     	; 0xde <lcd_write_cmd>
  110:	08 95       	ret
 
 00000112 <lcd_write_data>:
-
-	// Second nibble
-	PORTC = (byte<<4);
-	lcd_strobe_lcd_e();
-}
-void lcd_write_data(unsigned char byte) {
  112:	cf 93       	push	r28
  114:	c8 2f       	mov	r28, r24
-	// First nibble.
-	PORTC = byte & 0xf0;
  116:	80 7f       	andi	r24, 0xF0	; 240
  118:	85 bb       	out	0x15, r24	; 21
-	PORTC |= (1<<LCD_RS);
  11a:	85 b3       	in	r24, 0x15	; 21
  11c:	84 60       	ori	r24, 0x04	; 4
  11e:	85 bb       	out	0x15, r24	; 21
-	lcd_strobe_lcd_e();
  120:	cb df       	rcall	.-106    	; 0xb8 <lcd_strobe_lcd_e>
-
-	// Second nibble
-	PORTC = (byte<<4);
  122:	c2 95       	swap	r28
  124:	c0 7f       	andi	r28, 0xF0	; 240
  126:	c5 bb       	out	0x15, r28	; 21
-	PORTC |= (1<<LCD_RS);
  128:	85 b3       	in	r24, 0x15	; 21
  12a:	84 60       	ori	r24, 0x04	; 4
-	lcd_strobe_lcd_e();
  12c:	85 bb       	out	0x15, r24	; 21
  12e:	c4 df       	rcall	.-120    	; 0xb8 <lcd_strobe_lcd_e>
-}
  130:	cf 91       	pop	r28
  132:	08 95       	ret
 
 00000134 <lcd_display_text>:
-	// Set cursor
-	lcd_write_cmd(0x0F);
-}
-
-void lcd_display_text(char *str)
-{
  134:	cf 93       	push	r28
  136:	df 93       	push	r29
  138:	ec 01       	movw	r28, r24
-	for(;*str; str++){
  13a:	02 c0       	rjmp	.+4      	; 0x140 <lcd_display_text+0xc>
-		lcd_write_data(*str);
  13c:	ea df       	rcall	.-44     	; 0x112 <lcd_write_data>
-	lcd_write_cmd(0x0F);
-}
-
-void lcd_display_text(char *str)
-{
-	for(;*str; str++){
  13e:	21 96       	adiw	r28, 0x01	; 1
  140:	88 81       	ld	r24, Y
  142:	81 11       	cpse	r24, r1
  144:	fb cf       	rjmp	.-10     	; 0x13c <lcd_display_text+0x8>
-		lcd_write_data(*str);
-	}
-}
  146:	df 91       	pop	r29
  148:	cf 91       	pop	r28
  14a:	08 95       	ret
@@ -318,11 +239,11 @@ int main(){
  156:	90 e0       	ldi	r25, 0x00	; 0
  158:	d9 df       	rcall	.-78     	; 0x10c <lcd_set_cursor>
 	while(1){
-	for (int i = 0; i<32; i++)
+		for (int i = 0; i<32; i++)
  15a:	c0 e0       	ldi	r28, 0x00	; 0
  15c:	d0 e0       	ldi	r29, 0x00	; 0
-	{
-		lcd_set_cursor(i);
+		{
+			lcd_set_cursor(i);
  15e:	18 c0       	rjmp	.+48     	; 0x190 <main+0x44>
  160:	ce 01       	movw	r24, r28
  162:	d4 df       	rcall	.-88     	; 0x10c <lcd_set_cursor>
@@ -334,8 +255,8 @@ int main(){
  16e:	90 40       	sbci	r25, 0x00	; 0
  170:	e1 f7       	brne	.-8      	; 0x16a <main+0x1e>
  172:	00 c0       	rjmp	.+0      	; 0x174 <main+0x28>
-		_delay_ms(250);
-		lcd_display_text("hey");
+			_delay_ms(250);
+			lcd_display_text("hey");
  174:	00 00       	nop
  176:	80 e0       	ldi	r24, 0x00	; 0
  178:	91 e0       	ldi	r25, 0x01	; 1
@@ -354,7 +275,7 @@ int main(){
 	lcd_display_text("hey");
 	lcd_set_cursor(0);
 	while(1){
-	for (int i = 0; i<32; i++)
+		for (int i = 0; i<32; i++)
  18e:	21 96       	adiw	r28, 0x01	; 1
  190:	c0 32       	cpi	r28, 0x20	; 32
  192:	d1 05       	cpc	r29, r1
