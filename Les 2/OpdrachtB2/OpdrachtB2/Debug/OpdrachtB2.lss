@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000000f4  00000000  00000000  000017e8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000474  00000000  00000000  000018dc  2**0
+ 10 .debug_str    0000047e  00000000  00000000  000018dc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000248  00000000  00000000  00001d50  2**0
+ 11 .debug_loc    00000248  00000000  00000000  00001d5a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000030  00000000  00000000  00001f98  2**0
+ 12 .debug_ranges 00000030  00000000  00000000  00001fa2  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -160,7 +160,7 @@ int main( void ) {
   c8:	ff cf       	rjmp	.-2      	; 0xc8 <main+0x1a>
 
 000000ca <Next_Light_State>:
-}
+	
 void Next_Light_State(){
 	static int state = 0;
 
