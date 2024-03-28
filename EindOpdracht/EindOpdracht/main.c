@@ -105,12 +105,12 @@ ISR(INT0_vect)
 		generateByteFromTime(morse_units, &buffer);
 		sprintf(count, "%d", morse_units);
 		lcd_display_text(count);
-		morse_units = 1;
-		PORTB = (0 << 0) ; // Toggle the LED
+		PORTB = (0 << 0) ; // Turn the LED off
 	}else
 	{
 		TIFR = (1 << OCF1A ) ; // clear the CTC flag ( writing a logic one to the set flag clears it)
-		PORTB = (1 << 0) ; // Toggle the LED
+		PORTB = (1 << 0) ; // Turn the LED on
+		morse_units = 1;
 	}
 	
 }
@@ -134,15 +134,30 @@ int main(void)
 	lcd_clear_display();
 	for (;;)
 	{
-		if (READING_INPUT){
-			if ( TIFR & (1 << OCF1A ))
+		if ( TIFR & (1 << OCF1A ))
+		{
+			morse_units ++;
+			if (READING_INPUT)
 			{
-				morse_units ++;	
 				PORTB ^= (1 << 0) ; // Toggle the LED
-				TIFR = (1 << OCF1A ) ; // clear the CTC flag ( writing a logic one to the set flag clears it)	
+				TIFR = (1 << OCF1A ) ; // clear the CTC flag ( writing a logic one to the set flag clears it)
+			}else
+			{
+				if(morse_units == 7)
+				{
+					lcd_display_text(" ");
+					morse_units = 1;
+				}else if (morse_units == 3)
+				{
+					lcd_display_text(morseByteToChar(buffer, morseMap) + NULL);
+					resetBuffer(&buffer);
+					morse_units = 1;
+				}
+				
 			}
 			
 		}
+		
 		
 	}
 	
