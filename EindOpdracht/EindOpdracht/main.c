@@ -18,11 +18,15 @@ char buffer = 0b00000000; // Initieel byte met alle bits op 0
 
 #define SECOND_ON_PRE_1024 9766
 #define TIMER_COMP_VALUE SECOND_ON_PRE_1024/2
+#define DEBOUNCE_DELAY_MS 10 // Adjust this value as needed
+
+volatile uint8_t READING_INPUT = 0;
+volatile uint8_t BUTTON_PRESSED = 0;
 
 void wait(int ms);
 char word_buffer;
 uint16_t morse_units = 0;
-volatile uint8_t READING_INPUT = 0;
+
 
 typedef struct {
 	char morseByte; // 8-bit representation of Morse code
@@ -98,15 +102,26 @@ void resetBuffer(char *buffer) {
 
 ISR(INT0_vect)
 {
-	TCNT1 = 0;
-	READING_INPUT = (PIND & 1);
-	if(READING_INPUT == 0 )
+	_delay_ms(DEBOUNCE_DELAY_MS);
+	uint8_t buttonState = PIND & 1;
+	
+	// If the button is pressed and was previously released (debouncing)
+	if (buttonState == 0 && BUTTON_PRESSED == 1) 
 	{
+		BUTTON_PRESSED = 0; // Mark button as pressed
+		READING_INPUT = 0; // Indicate that input is being read
+		
 		//get morse value and use morse map to determine Letter
 		generateByteFromTime(morse_units, &buffer);
-		PORTB = 0 ; // Turn the LED off
+		PORTB = 0; // Turn the LED off
+	} else if (buttonState == 1 && BUTTON_PRESSED == 0) 
+	{
+		BUTTON_PRESSED = 1; // Mark button as released
+		READING_INPUT = 1; // Indicate that input is being read
+		
+		morse_units = 0; // Reset morse units counter
+		//PORTB = 1; // Turn LED on
 	}
-	morse_units = 0;
 	
 	
 	//TIFR = (1 << OCF1A ) ; // clear the CTC flag ( writing a logic one to the set flag clears it)
