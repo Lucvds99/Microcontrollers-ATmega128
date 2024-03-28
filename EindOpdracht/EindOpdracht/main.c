@@ -17,6 +17,7 @@ char buffer = 0b00000000; // Initieel byte met alle bits op 0
 
 
 #define SECOND_ON_PRE_1024 9766
+#define TIMER_COMP_VALUE SECOND_ON_PRE_1024/2
 
 void wait(int ms);
 char word_buffer;
@@ -25,40 +26,41 @@ volatile uint8_t READING_INPUT = 0;
 
 typedef struct {
 	char morseByte; // 8-bit representation of Morse code
-	char character; // Corresponding character
+	char *character; // Corresponding character
 } MorseMapping;
 
 MorseMapping morseMap[26] = {
-	{0b00000111, 'A'},
-	{0b11010101, 'B'},
-	{0b11011101, 'C'},
-	{0b00110101, 'D'},
-	{0b00000001, 'E'},
-	{0b01011101, 'F'},
-	{0b00111101, 'G'},
-	{0b01010101, 'H'},
-	{0b00000101, 'I'},
-	{0b01111111, 'J'},
-	{0b00110111, 'K'},
-	{0b01110101, 'L'},
-	{0b00001111, 'M'},
-	{0b00001101, 'N'},
-	{0b00111111, 'O'},
-	{0b01111101, 'P'},
-	{0b11110111, 'Q'},
-	{0b00011101, 'R'},
-	{0b00010101, 'S'},
-	{0b00000011, 'T'},
-	{0b00010111, 'U'},
-	{0b01010111, 'V'},
-	{0b00011111, 'W'},
-	{0b11010111, 'X'},
-	{0b11011111, 'Y'},
-	{0b11110101, 'Z'}
+    {0b00000111, "a"},
+    {0b11010101, "b"},
+    {0b11011101, "c"},
+    {0b00110101, "d"},
+    {0b00000001, "e"},
+    {0b01011101, "f"},
+    {0b00111101, "g"},
+    {0b01010101, "h"},
+    {0b00000101, "i"},
+    {0b01111111, "j"},
+    {0b00110111, "k"},
+    {0b01110101, "l"},
+    {0b00001111, "m"},
+    {0b00001101, "n"},
+    {0b00111111, "o"},
+    {0b01111101, "p"},
+    {0b11110111, "q"},
+    {0b00011101, "r"},
+    {0b00010101, "s"},
+    {0b00000011, "t"},
+    {0b00010111, "u"},
+    {0b01010111, "v"},
+    {0b00011111, "w"},
+    {0b11010111, "x"},
+    {0b11011111, "y"},
+    {0b11110101, "z"}
 };
 
+
 // Function to convert a character to its Morse code byte representation
-char charToMorseByte(char c, MorseMapping morseMap[]) {
+char charToMorseByte(char *c, MorseMapping morseMap[]) {
 	// Iterate through the Morse mapping array to find the corresponding Morse byte
 	for (int i = 0; i < 26; i++) {
 		if (morseMap[i].character == c) {
@@ -69,7 +71,7 @@ char charToMorseByte(char c, MorseMapping morseMap[]) {
 }
 
 // Function to convert a Morse code byte representation to its corresponding character
-char morseByteToChar(char morseByte, MorseMapping morseMap[]) {
+char *morseByteToChar(char morseByte, MorseMapping morseMap[]) {
 	// Iterate through the Morse mapping array to find the corresponding character
 	for (int i = 0; i < 26; i++) {
 		if (morseMap[i].morseByte == morseByte) {
@@ -81,7 +83,7 @@ char morseByteToChar(char morseByte, MorseMapping morseMap[]) {
 
 char *generateByteFromTime(int time, char *buffer) {
 		// Als de tijd kleiner is dan 3 (uur of minuut)
-		if (time < 3) {
+		if (time < 2) {
 			*buffer = (*buffer << 2) | 0b01; // Shift eerst de buffer byte naar links en voeg vervolgens 01 toe
 			//*buffer = '.';
 			} else {
@@ -96,30 +98,26 @@ void resetBuffer(char *buffer) {
 
 ISR(INT0_vect)
 {
+	TCNT1 = 0;
 	READING_INPUT = (PIND & 1);
 	if(READING_INPUT == 0 )
 	{
-		char count [16];
 		//get morse value and use morse map to determine Letter
-		lcd_clear_display();
 		generateByteFromTime(morse_units, &buffer);
-		sprintf(count, "%d", morse_units);
-		lcd_display_text(count);
-		PORTB = (0 << 0) ; // Turn the LED off
-	}else
-	{
-		TIFR = (1 << OCF1A ) ; // clear the CTC flag ( writing a logic one to the set flag clears it)
-		PORTB = (1 << 0) ; // Turn the LED on
-		morse_units = 1;
+		PORTB = 0 ; // Turn the LED off
 	}
+	morse_units = 0;
+	
+	
+	//TIFR = (1 << OCF1A ) ; // clear the CTC flag ( writing a logic one to the set flag clears it)
 	
 }
 
 int main(void)
 {
-	DDRB |= (1 << 0) | (1 << 1) ; // Set LED as output
+	DDRB = 0xFF ; // Set LED as output
 	TCCR1B |= (1 << WGM12 ); // Configure timer 1 for CTC mode
-	OCR1A = (SECOND_ON_PRE_1024/2); // Set CTC compare value to 1Hz at 1 MHz AVR clock , with a prescaler of 64
+	OCR1A = (TIMER_COMP_VALUE); // Set CTC compare value to 1Hz at 1 MHz AVR clock , with a prescaler of 64
 	TCCR1B |= ((1 << CS10 ) | (0 << CS11 )) | (1 << CS12) ; // Start timer at Fcpu /1024
 	
 	// Initialiseer knop
@@ -136,26 +134,28 @@ int main(void)
 	{
 		if ( TIFR & (1 << OCF1A ))
 		{
-			morse_units ++;
+			
+			TIFR = (1 << OCF1A ) ; // clear the CTC flag ( writing a logic one to the set flag clears it)
+			printf("hey");
 			if (READING_INPUT)
 			{
-				PORTB ^= (1 << 0) ; // Toggle the LED
-				TIFR = (1 << OCF1A ) ; // clear the CTC flag ( writing a logic one to the set flag clears it)
+				
+				PORTB |= (1 << morse_units) ; // Toggle the LED
+				
 			}else
 			{
-				if(morse_units == 7)
+				if(morse_units == 12)
 				{
 					lcd_display_text(" ");
-					morse_units = 1;
-				}else if (morse_units == 3)
-				{
-					lcd_display_text(morseByteToChar(buffer, morseMap) + NULL);
-					resetBuffer(&buffer);
-					morse_units = 1;
-				}
 				
+				}else if (morse_units == 6)
+				{
+					lcd_display_text(morseByteToChar(buffer, morseMap));
+					resetBuffer(&buffer);
+				
+				}
 			}
-			
+		morse_units ++;				
 		}
 		
 		
