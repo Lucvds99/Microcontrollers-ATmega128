@@ -311,9 +311,9 @@ char *morseByteToChar(char morseByte, MorseMapping morseMap[]) {
 			return morseMap[i].character;
 		}
 	}
-	return '\0'; // Return null character if Morse byte not found (not in Morse mapping)
- 188:	80 e0       	ldi	r24, 0x00	; 0
- 18a:	90 e0       	ldi	r25, 0x00	; 0
+	return ""; // Return null character if Morse byte not found (not in Morse mapping)
+ 188:	83 e5       	ldi	r24, 0x53	; 83
+ 18a:	91 e0       	ldi	r25, 0x01	; 1
 }
  18c:	08 95       	ret
 
@@ -552,9 +552,9 @@ int main(void)
 				
 			}else
 			{
-				if(morse_units == 12)
+				if(morse_units == 7)
  2d0:	90 91 87 01 	lds	r25, 0x0187	; 0x800187 <__data_end+0x1>
- 2d4:	8c 30       	cpi	r24, 0x0C	; 12
+ 2d4:	87 30       	cpi	r24, 0x07	; 7
  2d6:	91 05       	cpc	r25, r1
  2d8:	21 f4       	brne	.+8      	; 0x2e2 <main+0x7e>
 				{
@@ -563,9 +563,9 @@ int main(void)
  2dc:	91 e0       	ldi	r25, 0x01	; 1
  2de:	33 df       	rcall	.-410    	; 0x146 <lcd_display_text>
  2e0:	0b c0       	rjmp	.+22     	; 0x2f8 <main+0x94>
- 2e2:	06 97       	sbiw	r24, 0x06	; 6
+ 2e2:	03 97       	sbiw	r24, 0x03	; 3
 				
-				}else if (morse_units == 6)
+				}else if (morse_units == 3)
  2e4:	49 f4       	brne	.+18     	; 0x2f8 <main+0x94>
  2e6:	60 e0       	ldi	r22, 0x00	; 0
 				{

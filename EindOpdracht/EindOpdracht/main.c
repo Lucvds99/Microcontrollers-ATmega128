@@ -82,7 +82,7 @@ char *morseByteToChar(char morseByte, MorseMapping morseMap[]) {
 			return morseMap[i].character;
 		}
 	}
-	return '\0'; // Return null character if Morse byte not found (not in Morse mapping)
+	return ""; // Return null character if Morse byte not found (not in Morse mapping)
 }
 
 char *generateByteFromTime(int time, char *buffer) {
@@ -159,11 +159,11 @@ int main(void)
 				
 			}else
 			{
-				if(morse_units == 12)
+				if(morse_units == 7)
 				{
 					lcd_display_text(" ");
 				
-				}else if (morse_units == 6)
+				}else if (morse_units == 3)
 				{
 					lcd_display_text(morseByteToChar(buffer, morseMap));
 					resetBuffer(&buffer);

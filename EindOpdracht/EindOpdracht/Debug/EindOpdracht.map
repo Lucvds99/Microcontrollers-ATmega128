@@ -424,7 +424,7 @@ END GROUP
  *(.rodata*)
  .rodata.str1.1
                 0x0080014e       0x38 main.o
-                                 0x3a (size before relaxing)
+                                 0x3b (size before relaxing)
  *(.gnu.linkonce.r*)
                 0x00800186                . = ALIGN (0x2)
                 0x00800186                _edata = .
