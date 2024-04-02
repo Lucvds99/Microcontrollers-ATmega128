@@ -11,5 +11,6 @@ void lcd_init(void);
 void lcd_display_text(char *str);
 void lcd_set_cursor(int position);
 void lcd_write_cmd(unsigned char byte);
+
 #endif
 
